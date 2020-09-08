@@ -33,9 +33,8 @@ public class Exercicio_CSV {
 		boolean success = new File(caminho + "\\out").mkdir();
 		System.out.println("Directory created successfully " + success);
 		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader (patch));
-			
+		try (BufferedReader br = new BufferedReader(new FileReader (patch))){
+						
 			String line = br.readLine();
 			
 			while(line != null) {
@@ -51,6 +50,7 @@ public class Exercicio_CSV {
 				line = br.readLine();
 			}
 			
+			System.out.println("Products: ");
 			for(Product x : list) {
 				System.out.println(x.toString());
 			}
@@ -69,9 +69,9 @@ public class Exercicio_CSV {
 			// TODO Auto-generated catch block
 			System.out.println("Error reading file: " + e.getMessage());
 
+		}finally {
+			sc.close();
 		}
-		
-		sc.close();
 		
 	}
 }
